@@ -5,16 +5,24 @@
 /*For User*/
 void menu();
 int choice();
+
 /*Essential and For Efficient use*/
 int isNull(struct Node *head);
 int countNodes(struct Node *head);
+
 /*Display Function*/
 void display(struct Node *head);
+
 /*Insert Functions*/
 void insertEnd(struct Node **head, int data);
 void insertStart(struct Node **head, int data);
 void insertNth(struct Node **head, int data, int place);
+
 /*Delete Functions*/
+void deleteEnd(struct Node **head, int data);
+void deleteStart(struct Node **head, int data);
+void deleteNth(struct Node **head, int data, int place);
+
 /*Node Structure*/
 struct Node
 {
@@ -112,4 +120,33 @@ void insertStart(struct Node **head, int data)
 }
 void insertNth(struct Node **head, int data, int place)
 {
+	if (isNull(*head))
+	{
+		printf("LIST IS EMPTY");
+	}
+	else
+	{
+	}
+}
+
+void deleteEnd(struct Node **head, int data)
+{
+	if (isNull(*head))
+	{
+		printf("LIST IS EMPTY");
+	}
+}
+void deleteStart(struct Node **head, int data)
+{
+	if (isNull(*head))
+	{
+		printf("LIST IS EMPTY");
+	}
+}
+void deleteNth(struct Node **head, int data, int place)
+{
+	if (isNull(*head))
+	{
+		printf("LIST IS EMPTY");
+	}
 }
