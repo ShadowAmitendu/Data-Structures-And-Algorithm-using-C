@@ -2,14 +2,19 @@
 #include <stdlib.h> /*Has the Malloc Function*/
 
 /*Listing the Functions*/
+/*For User*/
 void menu();
 int choice();
+/*Essential and For Efficient use*/
 int isNull(struct Node *head);
 int countNodes(struct Node *head);
+/*Display Function*/
 void display(struct Node *head);
+/*Insert Functions*/
 void insertEnd(struct Node **head, int data);
 void insertStart(struct Node **head, int data);
-
+void insertNth(struct Node **head, int data, int place);
+/*Delete Functions*/
 /*Node Structure*/
 struct Node
 {
@@ -98,5 +103,13 @@ void insertEnd(struct Node **head, int data)
 }
 
 void insertStart(struct Node **head, int data)
+{
+	struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
+	ptr->data = data;
+	ptr->link = *head;
+
+	*head = ptr;
+}
+void insertNth(struct Node **head, int data, int place)
 {
 }
