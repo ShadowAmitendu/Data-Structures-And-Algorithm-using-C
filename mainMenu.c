@@ -35,12 +35,10 @@ int main()
 {
 	struct Node *head = NULL;
 
-	//	menu();
-	//	int choice = choiceByUser();
 	insertEnd(&head, 455);
 	insertEnd(&head, 45);
 	display(head);
-	//	countNodes();
+	//	countNodes(head);
 }
 
 /*This Function Checks for if the head has any value or is it NULL*/
