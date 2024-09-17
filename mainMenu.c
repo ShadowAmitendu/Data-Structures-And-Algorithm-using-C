@@ -1,47 +1,88 @@
-#include <stdio.h>	/*Has the Standard Input and Output Functions */
-#include <stdlib.h> /*Has the Malloc Function*/
+#include <stdio.h>	/* Has the Standard Input and Output Functions */
+#include <stdlib.h> /* Has the Malloc Function */
 
-/*Listing the Functions*/
-/*For User*/
+/* Listing the Functions */
+/* For User */
 void menu();
 int choice();
 
-/*Essential and For Efficient use*/
+/* Essential and For Efficient use */
 int isNull(struct Node *head);
 int countNodes(struct Node *head);
 
-/*Display Function*/
+/* Display Function */
 void display(struct Node *head);
 
-/*Insert Functions*/
+/* Insert Functions */
 void insertEnd(struct Node **head, int data);
 void insertStart(struct Node **head, int data);
 void insertNth(struct Node **head, int data, int place);
 
-/*Delete Functions*/
+/* Delete Functions */
 void deleteEnd(struct Node *head);
 struct Node *deleteStart(struct Node *head);
-void deleteNth(struct Node **head, int data, int place);
+void deleteNth(struct Node **head, int place);
 
-/*Node Structure*/
+/* Node Structure */
 struct Node
 {
 	int data;
 	struct Node *link;
 };
 
-/*Main Entry Point of the Program*/
+/* Main Entry Point of the Program */
 int main()
 {
 	struct Node *head = NULL;
 
-	insertEnd(&head, 455);
-	insertEnd(&head, 45);
+	// Insert elements at the end
+	printf("Inserting at the end:\n");
+	insertEnd(&head, 10);
+	insertEnd(&head, 20);
+	insertEnd(&head, 30);
+	insertEnd(&head, 40);
 	display(head);
-	//	countNodes(head);
+	printf("\n");
+
+	// Insert element at the start
+	printf("Inserting at the start:\n");
+	insertStart(&head, 5);
+	display(head);
+	printf("\n");
+
+	// Insert element at position 3
+	printf("Inserting at position 3:\n");
+	insertNth(&head, 25, 3);
+	display(head);
+	printf("\n");
+
+	// Display total number of nodes
+	printf("Total number of nodes: %d\n", countNodes(head));
+
+	// Delete element from the end
+	printf("Deleting from the end:\n");
+	deleteEnd(head);
+	display(head);
+	printf("\n");
+
+	// Delete element from the start
+	printf("Deleting from the start:\n");
+	head = deleteStart(head);
+	display(head);
+	printf("\n");
+
+	// Delete element at position 3
+	printf("Deleting from position 3:\n");
+	deleteNth(&head, 0, 3); // Data is not necessary here for deletion
+	display(head);
+	printf("\n");
+
+	// Display total number of nodes again
+	printf("Total number of nodes after deletion: %d\n", countNodes(head));
+
+	return 0;
 }
 
-/*This Function Checks for if the head has any value or is it NULL*/
 int isNull(struct Node *head)
 {
 	return (head == NULL);
@@ -54,7 +95,7 @@ int countNodes(struct Node *head)
 
 	if (isNull(head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else
 	{
@@ -73,7 +114,7 @@ void display(struct Node *head)
 
 	if (isNull(head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else
 	{
@@ -82,7 +123,7 @@ void display(struct Node *head)
 			printf("%d -> ", temp->data);
 			temp = temp->link;
 		}
-		printf("NULL!");
+		printf("NULL!\n");
 	}
 }
 
@@ -116,11 +157,12 @@ void insertStart(struct Node **head, int data)
 
 	*head = ptr;
 }
+
 void insertNth(struct Node **head, int data, int place)
 {
 	if (isNull(*head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else
 	{
@@ -129,6 +171,13 @@ void insertNth(struct Node **head, int data, int place)
 
 		ptr->data = data;
 		ptr->link = NULL;
+
+		if (place == 1)
+		{
+			ptr->link = *head;
+			*head = ptr;
+			return;
+		}
 
 		while (place != 2)
 		{
@@ -144,24 +193,33 @@ void deleteEnd(struct Node *head)
 {
 	if (isNull(head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else
 	{
 		struct Node *temp = head;
-		while (temp->link->link != NULL)
+		if (temp->link == NULL)
 		{
-			temp = temp->link;
+			free(temp);
+			head = NULL;
 		}
-		free(temp->link);
-		temp->link = NULL;
+		else
+		{
+			while (temp->link->link != NULL)
+			{
+				temp = temp->link;
+			}
+			free(temp->link);
+			temp->link = NULL;
+		}
 	}
 }
+
 struct Node *deleteStart(struct Node *head)
 {
 	if (isNull(head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else
 	{
@@ -172,12 +230,13 @@ struct Node *deleteStart(struct Node *head)
 	}
 	return head;
 }
-void deleteNth(struct Node **head, int data, int place)
+
+void deleteNth(struct Node **head, int place)
 {
 	struct Node *prev = *head, *cur = *head;
 	if (isNull(*head))
 	{
-		printf("LIST IS EMPTY");
+		printf("LIST IS EMPTY\n");
 	}
 	else if (place == 1)
 	{
@@ -188,7 +247,6 @@ void deleteNth(struct Node **head, int data, int place)
 	}
 	else
 	{
-
 		while (place != 1)
 		{
 			prev = cur;
