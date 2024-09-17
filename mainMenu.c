@@ -73,7 +73,7 @@ int main()
 
 	// Delete element at position 3
 	printf("Deleting from position 3:\n");
-	deleteNth(&head, 0, 3); // Data is not necessary here for deletion
+	deleteNth(&head, 3); // Data is not necessary here for deletion
 	display(head);
 	printf("\n");
 
