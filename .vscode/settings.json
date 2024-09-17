@@ -2,6 +2,7 @@
   "files.associations": {
     "stdlib.h": "c",
     "insertend.h": "c",
-    "linkedlist.h": "c"
+    "linkedlist.h": "c",
+    "stdio.h": "c"
   }
 }

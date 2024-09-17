@@ -149,15 +149,12 @@ void deleteEnd(struct Node *head)
 	else
 	{
 		struct Node *temp = head;
-		struct Node *temp_prev = head;
-		while (temp->link != NULL)
+		while (temp->link->link != NULL)
 		{
-			temp_prev = temp;
 			temp = temp->link;
 		}
-		temp_prev->link = NULL;
-		free(temp);
-		temp = NULL;
+		free(temp->link);
+		temp->link = NULL;
 	}
 }
 struct Node *deleteStart(struct Node *head)
@@ -177,12 +174,29 @@ struct Node *deleteStart(struct Node *head)
 }
 void deleteNth(struct Node **head, int data, int place)
 {
+	struct Node *prev = *head, *cur = *head;
 	if (isNull(*head))
 	{
 		printf("LIST IS EMPTY");
 	}
+	else if (place == 1)
+	{
+		*head = cur->link;
+		free(cur);
+		cur = NULL;
+		prev = NULL;
+	}
 	else
 	{
-		struct Node *temp = *head;
+
+		while (place != 1)
+		{
+			prev = cur;
+			cur = cur->link;
+			place--;
+		}
+		prev->link = cur->link;
+		free(cur);
+		cur = NULL;
 	}
 }
