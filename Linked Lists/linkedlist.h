@@ -2,7 +2,8 @@
 #define LINKED_LIST_H
 
 // Define the structure for a Node with a 'link' pointer to the next node
-struct Node {
+struct Node
+{
     int data;
     struct Node *link; // This is the pointer to the next node
 };
