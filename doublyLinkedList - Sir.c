@@ -10,6 +10,8 @@ typedef struct Node
     struct Node *next;
 } DNode;
 
+                                    /* Doubly Linked List */
+
 void insert_at_beginning(DNode **head, int value)
 {
     DNode *new_node = (DNode *)malloc(sizeof(DNode));
