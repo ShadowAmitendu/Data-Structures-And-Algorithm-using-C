@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define a structure for the Singly Linked List node
 struct Node
 {
     int data;
@@ -57,13 +56,12 @@ void displayList(struct Node *head)
 void sortList(struct Node **head)
 {
     if (*head == NULL)
-        return; // If the list is empty
-
+        return;
+        
     int swapped;
     struct Node *ptr1;
     struct Node *lptr = NULL;
 
-    // Loop until no swaps occur
     do
     {
         swapped = 0;
