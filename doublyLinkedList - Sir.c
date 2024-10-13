@@ -1,280 +1,292 @@
-// Doubly Linked List
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <conio.h>
 
-typedef struct node
+typedef struct Node
 {
-    struct node *prev;
+    struct Node *prev;
     int data;
-    struct node *next;
-} Dnode;
+    struct Node *next;
+} DNode;
 
-void dinsert_beg(Dnode **p, int n)
+void insert_at_beginning(DNode **head, int value)
 {
-    Dnode *q;
-    q = (Dnode *)malloc(sizeof(Dnode));
-    q->data = n;
-    q->prev = NULL;
-    q->next = *p;
-    if (*p != NULL)
-        (*p)->prev = q;
-    *p = q;
+    DNode *new_node = (DNode *)malloc(sizeof(DNode));
+    new_node->data = value;
+    new_node->prev = NULL;
+    new_node->next = *head;
+
+    if (*head != NULL)
+        (*head)->prev = new_node;
+
+    *head = new_node;
 }
-void dinsert_end(Dnode **p, int n)
+
+void insert_at_end(DNode **head, int value)
 {
-    Dnode *q, *r = *p;
-    q = (Dnode *)malloc(sizeof(Dnode));
-    q->data = n;
-    q->next = NULL;
-    if (*p == NULL)
+    DNode *new_node = (DNode *)malloc(sizeof(DNode));
+    new_node->data = value;
+    new_node->next = NULL;
+
+    if (*head == NULL)
     {
-        q->prev = NULL;
-        *p = q;
+        new_node->prev = NULL;
+        *head = new_node;
     }
     else
     {
-        while (r->next != NULL)
-        {
-            r = r->next;
-        }
-        r->next = q;
-        q->prev = r;
-    }
-}
-void dinsert_nth(Dnode **p, int n, int pos)
-{
-    Dnode *q, *r = *p;
-    int i;
-    q = (Dnode *)malloc(sizeof(Dnode));
-    q->data = n;
-    if (pos == 1)
-    {
-        q->prev = NULL;
-        q->next = *p;
-        if (*p != NULL)
-        {
-            (*p)->prev = q;
-        }
-        *p = q;
-    }
-    else
-    {
-        for (i = 0; i < pos - 2; i++)
-        {
-            r = r->next;
-        }
-        q->prev = r;
-        q->next = r->next;
-        if (r->next != NULL)
-            r->next->prev = q;
-        r->next = q;
-    }
-}
-void ddelete_beg(Dnode **p)
-{
-    Dnode *r = *p;
-    if (*p == NULL)
-        printf("Null List! Deletion Not Possible");
-    else
-    {
-        if (r->next != NULL)
-        {
-            r->next->prev = NULL;
-        }
-        *p = r->next;
-        free(r);
-    }
-}
-void ddelete_end(Dnode **p)
-{
-    Dnode *r = *p;
-    if (*p == NULL)
-        printf("Null List! Deletion Not Possible");
-    else
-    {
-        while (r->next != NULL)
-        {
-            r = r->next;
-        }
-        r->prev->next = NULL;
-        free(r);
-    }
-}
-void ddelete_nth(Dnode **p, int pos)
-{
-    Dnode *r = *p;
-    int i;
-    if (*p == NULL)
-    {
-        printf("Null List! Deletion Not Possible");
-    }
-    else if (pos == 1)
-    {
-        if (r->next != NULL)
-            r->next->prev = NULL;
-        *p = r->next;
-        free(r);
-    }
-    else
-    {
-        for (i = 0; i < pos - 1; i++)
-        {
-            r = r->next;
-        }
-        r->prev->next = r->next;
-        r->next->prev = r->prev;
-        free(r);
-    }
-}
-void ddisplay(Dnode *p)
-{
-    Dnode *r = p;
-    if (p == NULL)
-    {
-        printf("Null List");
-    }
-    else
-    {
-        while (r->next != NULL)
-        {
-            printf("%d\t", r->data);
-            r = r->next;
-        }
-        printf("%d", r->data);
-    }
-}
-void ddisplay_reverse(Dnode *p)
-{
-    Dnode *r = p;
-    if (p == NULL)
-    {
-        printf("Null List");
-    }
-    else
-    {
-        while (r->next != NULL)
-        {
-            r = r->next;
-        }
-        while (r->prev != NULL)
-        {
-            printf("%d---", r->data);
-            r = r->prev;
-        }
-        printf("%d", r->data);
+        DNode *temp = *head;
+        while (temp->next != NULL)
+            temp = temp->next;
+
+        temp->next = new_node;
+        new_node->prev = temp;
     }
 }
 
-Dnode *largest(Dnode *p)
+void insert_at_position(DNode **head, int value, int position)
 {
-    Dnode *t = p;
-    int max = 0;
-    if (p == NULL)
+    DNode *new_node = (DNode *)malloc(sizeof(DNode));
+    new_node->data = value;
+
+    if (position == 1)
     {
-        return (NULL);
-    }
-    else if (p->next == NULL)
-    {
-        return (p);
+        new_node->prev = NULL;
+        new_node->next = *head;
+        if (*head != NULL)
+            (*head)->prev = new_node;
+        *head = new_node;
     }
     else
     {
-        max = p->data;
-        p = p->next;
-        while (p->next != NULL)
-        {
-            if (p->data > max)
-            {
-                max = p->data;
-                t = p;
-                p = p->next;
-            }
-            else
-            {
-                p = p->next;
-            }
-        }
+        DNode *temp = *head;
+        for (int i = 1; i < position - 1 && temp != NULL; i++)
+            temp = temp->next;
+
+        new_node->prev = temp;
+        new_node->next = temp->next;
+
+        if (temp->next != NULL)
+            temp->next->prev = new_node;
+
+        temp->next = new_node;
     }
-    return (t);
 }
+
+void delete_first(DNode **head)
+{
+    if (*head == NULL)
+    {
+        printf("List is empty! Deletion not possible.\n");
+        return;
+    }
+
+    DNode *temp = *head;
+    *head = temp->next;
+
+    if (*head != NULL)
+        (*head)->prev = NULL;
+
+    free(temp);
+}
+
+void delete_last(DNode **head)
+{
+    if (*head == NULL)
+    {
+        printf("List is empty! Deletion not possible.\n");
+        return;
+    }
+
+    DNode *temp = *head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    if (temp->prev != NULL)
+        temp->prev->next = NULL;
+    else
+        *head = NULL;
+
+    free(temp);
+}
+
+void delete_at_position(DNode **head, int position)
+{
+    if (*head == NULL)
+    {
+        printf("List is empty! Deletion not possible.\n");
+        return;
+    }
+
+    DNode *temp = *head;
+
+    if (position == 1)
+    {
+        *head = temp->next;
+        if (*head != NULL)
+            (*head)->prev = NULL;
+        free(temp);
+    }
+    else
+    {
+        for (int i = 1; i < position && temp != NULL; i++)
+            temp = temp->next;
+
+        if (temp == NULL)
+        {
+            printf("Position out of range.\n");
+            return;
+        }
+
+        if (temp->next != NULL)
+            temp->next->prev = temp->prev;
+
+        if (temp->prev != NULL)
+            temp->prev->next = temp->next;
+
+        free(temp);
+    }
+}
+
+void display_list(DNode *head)
+{
+    if (head == NULL)
+    {
+        printf("List is empty.\n");
+        return;
+    }
+
+    DNode *temp = head;
+    while (temp != NULL)
+    {
+        printf("%d\t", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+void display_reverse_list(DNode *head)
+{
+    if (head == NULL)
+    {
+        printf("List is empty.\n");
+        return;
+    }
+
+    DNode *temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    while (temp != NULL)
+    {
+        printf("%d\t", temp->data);
+        temp = temp->prev;
+    }
+    printf("\n");
+}
+
+DNode *find_largest(DNode *head)
+{
+    if (head == NULL)
+        return NULL;
+
+    DNode *max_node = head;
+    int max_value = head->data;
+
+    DNode *temp = head->next;
+    while (temp != NULL)
+    {
+        if (temp->data > max_value)
+        {
+            max_value = temp->data;
+            max_node = temp;
+        }
+        temp = temp->next;
+    }
+    return max_node;
+}
+
 int main()
 {
-    Dnode *head = NULL;
-    Dnode *large;
-    int num, loc, choice, l;
-    char opt;
-    printf("PROGRAM TO IMPLEMENT DOUBLE LINKED LIST");
-    printf("\n=======================================");
-    printf("\n1.Create/Appending The List");
-    printf("\n2.Insert Node At Beginning");
-    printf("\n3.Insert Node At End");
-    printf("\n4.Insert Node At Nth Position");
-    printf("\n5.Delete First Node");
-    printf("\n6.Delete Last Node");
-    printf("\n7.Delete Nth Node");
-    printf("\n8.Display The List");
-    printf("\n9.Reverse Display The List");
-    printf("\n10.Exit\n");
+    DNode *head = NULL;
+    int value, position, choice;
+    char continue_choice;
+
+    printf("PROGRAM TO IMPLEMENT DOUBLY LINKED LIST\n");
+    printf("=======================================\n");
+    printf("1. Append Data to the List\n");
+    printf("2. Insert at Beginning\n");
+    printf("3. Insert at End\n");
+    printf("4. Insert at Nth Position\n");
+    printf("5. Delete First Node\n");
+    printf("6. Delete Last Node\n");
+    printf("7. Delete Nth Node\n");
+    printf("8. Display List\n");
+    printf("9. Display List in Reverse\n");
+    printf("10. Exit\n");
+
     do
     {
-        printf("\nEnter Your Choice : ");
+        printf("\nEnter your choice: ");
         scanf("%d", &choice);
+
         switch (choice)
         {
         case 1:
             do
             {
-                printf("Enter The Data : ");
-                scanf("%d", &num);
-                dinsert_end(&head, num);
-                printf("Enter More Data (Y/N)? : ");
+                printf("Enter the data: ");
+                scanf("%d", &value);
+                insert_at_end(&head, value);
+                printf("Enter more data (Y/N)? ");
                 fflush(stdin);
-                opt = getchar();
-            } while (toupper(opt) != 'N');
+                continue_choice = getchar();
+            } while (toupper(continue_choice) != 'N');
             break;
         case 2:
-            printf("Enter The Data : ");
-            scanf("%d", &num);
-            dinsert_beg(&head, num);
+            printf("Enter the data: ");
+            scanf("%d", &value);
+            insert_at_beginning(&head, value);
             break;
         case 3:
-            printf("Enter The Data : ");
-            scanf("%d", &num);
-            dinsert_end(&head, num);
+            printf("Enter the data: ");
+            scanf("%d", &value);
+            insert_at_end(&head, value);
             break;
         case 4:
-            printf("\nEnter The Node Number Before Which New Node Will Be Inserted : ");
-            scanf("%d", &loc);
-            printf("\nEnter The Data : ");
-            scanf("%d", &num);
-            dinsert_nth(&head, num, loc);
+            printf("Enter the position to insert: ");
+            scanf("%d", &position);
+            printf("Enter the data: ");
+            scanf("%d", &value);
+            insert_at_position(&head, value, position);
             break;
         case 5:
-            ddelete_beg(&head);
+            delete_first(&head);
             break;
         case 6:
-            ddelete_end(&head);
+            delete_last(&head);
             break;
         case 7:
-            printf("\nEnter The Node Number You Want To Delete : ");
-            scanf("%d", &loc);
-            ddelete_nth(&head, loc);
+            printf("Enter the position to delete: ");
+            scanf("%d", &position);
+            delete_at_position(&head, position);
             break;
         case 8:
-            ddisplay(head);
+            display_list(head);
             break;
         case 9:
-            ddisplay_reverse(head);
+            display_reverse_list(head);
             break;
         case 10:
-            printf("\nQuiting........");
+            printf("Exiting...\n");
             getch();
             exit(0);
         default:
-            printf("Invalid Choice. Please Enter Correct Choice !");
+            printf("Invalid choice! Please try again.\n");
             getch();
         }
     } while (1);
+
+    return 0;
 }
