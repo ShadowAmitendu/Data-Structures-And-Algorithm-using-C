@@ -4,29 +4,31 @@
 struct Node
 {
     int data;
-    struct Node *next;
+    node *next;
 };
 
+typedef struct Node node;
+
 // Function to create a new node
-struct Node *createNode(int data)
+node *createNode(int data)
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    node *newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
 }
 
 // Function to insert a node at the end of the list
-void insertAtEnd(struct Node **head, int data)
+void insertAtEnd(node **head, int data)
 {
-    struct Node *newNode = createNode(data);
+    node *newNode = createNode(data);
     if (*head == NULL)
     {
         *head = newNode;
     }
     else
     {
-        struct Node *temp = *head;
+        node *temp = *head;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -36,9 +38,9 @@ void insertAtEnd(struct Node **head, int data)
 }
 
 // Function to display the list
-void displayList(struct Node *head)
+void displayList(node *head)
 {
-    struct Node *temp = head;
+    node *temp = head;
     if (head == NULL)
     {
         printf("List is empty\n");
@@ -52,15 +54,14 @@ void displayList(struct Node *head)
     printf("NULL\n");
 }
 
-// Function to sort the linked list in ascending order using Bubble Sort
-void sortList(struct Node **head)
+void sortList(node **head)
 {
     if (*head == NULL)
         return;
-        
+
     int swapped;
-    struct Node *ptr1;
-    struct Node *lptr = NULL;
+    node *ptr1;
+    node *lptr = NULL;
 
     do
     {
@@ -86,7 +87,7 @@ void sortList(struct Node **head)
 // Main function to demonstrate the program
 int main()
 {
-    struct Node *head = NULL;
+    node *head = NULL;
     int n, data;
 
     printf("Enter the number of elements to insert in the list: ");
