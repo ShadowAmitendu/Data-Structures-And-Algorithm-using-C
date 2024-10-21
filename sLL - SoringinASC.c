@@ -46,7 +46,7 @@ void displayList(node *head)
         printf("List is empty\n");
         return;
     }
-    while (temp != NULL)
+    while (temp != NULL)    
     {
         printf("%d -> ", temp->data);
         temp = temp->next;
@@ -72,7 +72,6 @@ void sortList(node **head)
         {
             if (ptr1->data > ptr1->next->data)
             {
-                // Swap data
                 int temp = ptr1->data;
                 ptr1->data = ptr1->next->data;
                 ptr1->next->data = temp;
@@ -80,7 +79,7 @@ void sortList(node **head)
             }
             ptr1 = ptr1->next;
         }
-        lptr = ptr1; // Last sorted node
+        lptr = ptr1;
     } while (swapped);
 }
 
