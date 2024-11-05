@@ -8,26 +8,29 @@ struct Node
     struct Node *next;
 };
 
+typedef struct Node node;
+
+
 // Function to create a new node
-struct Node *createNode(int data)
+node *createNode(int data)
 {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    node *newNode = (node *)malloc(sizeof(node));
     newNode->data = data;
     newNode->next = NULL;
     return newNode;
 }
 
 // Function to insert a node at the end of the list
-void insertAtEnd(struct Node **head, int data)
+void insertAtEnd(node **head, int data)
 {
-    struct Node *newNode = createNode(data);
+    node *newNode = createNode(data);
     if (*head == NULL)
     {
         *head = newNode;
     }
     else
     {
-        struct Node *temp = *head;
+        node *temp = *head;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -37,9 +40,9 @@ void insertAtEnd(struct Node **head, int data)
 }
 
 // Function to display the list
-void displayList(struct Node *head)
+void displayList(node *head)
 {
-    struct Node *temp = head;
+    node *temp = head;
     if (head == NULL)
     {
         printf("List is empty\n");
@@ -54,11 +57,11 @@ void displayList(struct Node *head)
 }
 
 // Function to reverse the linked list
-void reverseList(struct Node **head)
+void reverseList(node **head)
 {
-    struct Node *prev = NULL;
-    struct Node *current = *head;
-    struct Node *next = NULL;
+    node *prev = NULL;
+    node *current = *head;
+    node *next = NULL;
 
     while (current != NULL)
     {
@@ -73,7 +76,7 @@ void reverseList(struct Node **head)
 // Main function to demonstrate the program
 int main()
 {
-    struct Node *head = NULL;
+    node *head = NULL;
     int n, data;
 
     printf("Enter the number of elements to insert in the list: ");

@@ -175,6 +175,7 @@ int main()
 
     while (1)
     {
+        printf("=======================================\n");
         printf("PROGRAM TO IMPLEMENT SINGLY LINKED LIST\n");
         printf("=======================================\n");
         printf("1. Insert at Beginning\n");
@@ -185,8 +186,10 @@ int main()
         printf("6. Delete Nth Node\n");
         printf("7. Display List\n");
         printf("8. Exit\n");
+        printf("=======================================\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
+        printf("=======================================\n");
 
         switch (choice)
         {
