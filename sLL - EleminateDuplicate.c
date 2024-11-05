@@ -89,12 +89,12 @@ int main()
     int n, data;
 
     printf("Enter the number of elements to insert in the list: ");
-    scanf("%d", &n);
+    scanf_s("%d", &n);
 
     for (int i = 0; i < n; i++)
     {
         printf("Enter element %d: ", i + 1);
-        scanf("%d", &data);
+        scanf_s("%d", &data);
         insertAtEnd(&head, data);
     }
 
