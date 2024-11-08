@@ -78,7 +78,7 @@ void delete_at_position(CNode **head, int position)
         }
     }
     else
-    {                                                                 // Delete at the specified position
+    {                                                         // Delete at the specified position
         for (int i = 1; i < position - 1 && temp->next != *head; i++) // Traverse to (position-1)
             temp = temp->next;
 
@@ -127,20 +127,20 @@ int main()
     do
     {
         printf("\nEnter your choice: ");
-        scanf("%d", &choice);
+        scanf_s("%d", &choice);
 
         switch (choice)
         {
         case 1:
             printf("Enter the position to insert: ");
-            scanf("%d", &position);
+            scanf_s("%d", &position);
             printf("Enter the data: ");
-            scanf("%d", &value);
+            scanf_s("%d", &value);
             insert_at_position(&head, value, position);
             break;
         case 2:
             printf("Enter the position to delete: ");
-            scanf("%d", &position);
+            scanf_s("%d", &position);
             delete_at_position(&head, position);
             break;
         case 3:
