@@ -24,10 +24,10 @@ add_executable(Data_Structures_And_Algorithm_using_C
     "Sorting/bubbleSort - Modified.c"
     Sorting/bubbleSort.c
     Sorting/selectionSort.c
-    "circularLinkedList - Sir.c"
-    "doublyLinkedList - Sir.c"
+    "allSirPracticalFileCodes/circularLinkedList - Sir.c"
+    "allSirPracticalFileCodes/doublyLinkedList - Sir.c"
     mainMenu.c
-    "singlyLinkedList - Sir.c"
-    "sLL - EleminateDuplicate.c"
-    "sLL - Reverse.c"
-    "sLL - SoringinASC.c")
+    "allSirPracticalFileCodes/singlyLinkedList - Sir.c"
+    "allSirPracticalFileCodes/sLL - EleminateDuplicate.c"
+    "allSirPracticalFileCodes/sLL - Reverse.c"
+    "allSirPracticalFileCodes/sLL - SoringinASC.c")
