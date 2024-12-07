@@ -1,0 +1,3 @@
+C:/Users/amite/CLionProjects/Data-Structures-And-Algorithm-using-C/cmake-build-debug/CMakeFiles/Data_Structures_And_Algorithm_using_C.dir
+C:/Users/amite/CLionProjects/Data-Structures-And-Algorithm-using-C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/amite/CLionProjects/Data-Structures-And-Algorithm-using-C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
